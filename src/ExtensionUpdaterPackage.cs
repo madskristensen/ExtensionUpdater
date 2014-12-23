@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 using System;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
+using System.Windows.Threading;
 
 namespace MadsKristensen.ExtensionUpdater
 {
@@ -20,19 +21,24 @@ namespace MadsKristensen.ExtensionUpdater
         protected override void Initialize()
         {
             base.Initialize();
-            Settings.Initialize(this);
 
-            var repository = GetService(typeof(SVsExtensionRepository)) as IVsExtensionRepository;
-            var manager = GetService(typeof(SVsExtensionManager)) as IVsExtensionManager;
+            Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
+            {
+                Settings.Initialize(this);
 
-            // Setup the menu buttons
-            OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            Commands commands = new Commands(repository, manager, mcs);
-            commands.Initialize();
+                var repository = (IVsExtensionRepository)GetService(typeof(SVsExtensionRepository));
+                var manager = (IVsExtensionManager)GetService(typeof(SVsExtensionManager));
 
-            // Check for extension updates
-            Updater updater = new Updater(repository, manager);
-            updater.CheckForUpdates();
+                // Setup the menu buttons
+                OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+                Commands commands = new Commands(repository, manager, mcs);
+                commands.Initialize();
+
+                // Check for extension updates
+                Updater updater = new Updater(repository, manager);
+                updater.CheckForUpdates();
+
+            }), DispatcherPriority.ApplicationIdle, null);
         }
     }
 }

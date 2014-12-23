@@ -21,11 +21,7 @@ namespace MadsKristensen.ExtensionUpdater
 
         public void CheckForUpdates()
         {
-            Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
-            {
-                Task.Run(() => { Update(); });
-
-            }), DispatcherPriority.ApplicationIdle, null);
+            Task.Run(() => { Update(); });
         }
 
         private void Update()
