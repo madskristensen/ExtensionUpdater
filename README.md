@@ -1,4 +1,4 @@
-## Visual Studio Extension Auto Updater
+## Visual Studio Auto Updater
 
 This extension allows you to specify which of your Visual Studio extensions
 you want to automatically update when a new version is released.
