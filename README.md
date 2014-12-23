@@ -1,5 +1,7 @@
 ## Visual Studio Auto Updater
 
+[Download the extension on the VS Gallery](https://visualstudiogallery.msdn.microsoft.com/14973bbb-8e00-4cab-a8b4-415a38d78615)
+
 This extension allows you to specify which of your Visual Studio extensions
 you want to automatically update when a new version is released.
 
