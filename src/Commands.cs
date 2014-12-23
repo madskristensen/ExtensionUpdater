@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.ExtensionManager;
+using System.Linq;
 using Microsoft.VisualStudio.Shell;
 using System;
 using System.ComponentModel.Design;
@@ -48,7 +49,7 @@ namespace MadsKristensen.ExtensionUpdater
 
             int num = 0;
 
-            foreach (var extension in _manager.GetInstalledExtensions())
+            foreach (var extension in _manager.GetInstalledExtensions().OrderBy(e => e.Header.Name))
             {
                 if (extension.Header.SystemComponent || extension.Header.AllUsers || extension.Header.InstalledByMsi)
                     continue;
