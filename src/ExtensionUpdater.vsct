@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <Extern href="stdidcmd.h"/>
+    <Extern href="vsshlids.h"/>
+
+    <Commands package="guidExtensionUpdaterPkg">
+
+        <Menus>
+            <Menu guid="guidFlyoutMenu" id="FlyoutMenu" priority="0x9000" type="Menu">
+                <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_OTHER2" />
+                <Strings>
+                    <ButtonText>Auto Update Extensions</ButtonText>
+                </Strings>
+            </Menu>
+        </Menus>
+
+        <Groups>
+            <Group guid="guidFlyoutMenu" id="FlyoutMenuStaticGroup" priority="0x0600">
+                <Parent guid="guidFlyoutMenu" id="FlyoutMenu"/>
+            </Group>
+        </Groups>
+
+        <Buttons>
+            <Button guid="guidExtensionUpdaterCmdSet" id="cmdEnableAutoUpdate" priority="0x0100" type="Button">
+                <Parent guid="guidFlyoutMenu" id="FlyoutMenuStaticGroup" />
+                <CommandFlag>DynamicItemStart</CommandFlag>
+                <Strings>
+                    <ButtonText>Enable Automatic Updates</ButtonText>
+                </Strings>
+            </Button>
+        </Buttons>
+
+    </Commands>
+
+    <Symbols>
+        <!-- This is the package guid. -->
+        <GuidSymbol name="guidExtensionUpdaterPkg" value="{cb8900a0-79fb-4c76-a6d6-f4e88d3384d2}" />
+
+        <!-- This is the guid used to group the menu commands together -->
+        <GuidSymbol name="guidExtensionUpdaterCmdSet" value="{c1703d5f-c150-4977-a4a7-d4a6094412bf}">
+            <IDSymbol name="cmdEnableAutoUpdate" value="0x0100" />
+        </GuidSymbol>
+
+        <GuidSymbol name="guidFlyoutMenu" value="{c1703d5f-c150-4977-a4a2-d4a6094412ba}">
+            <IDSymbol name="FlyoutMenu" value="0x1020" />
+            <IDSymbol name="FlyoutMenuStaticGroup" value="0x1030" />
+        </GuidSymbol>
+    </Symbols>
+
+</CommandTable>
