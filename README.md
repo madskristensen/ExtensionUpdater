@@ -19,8 +19,17 @@ You specify which extensions to auto update in a flyout menu located in the
 
 ![Screenshot](https://raw.githubusercontent.com/madskristensen/ExtensionUpdater/master/artifacts/screenshot.png)
 
+The first item in the menu is `Enable Automatic Updates`. That's the master switch for 
+this feature. If it is unchecked, no auto updating will take place for any extension.
+
 Not all extensions are listed. Only the ones that can be auto updated, which excludes
 
 1. Extensions installed by MSIs.
 2. Extensions that require admin permissions to update.
 3. Extensions that are shipped as part of Visual Studio.
+
+### Known issues
+
+It only works in Visual Studoi 2015 due to technical issues. I'm trying to find a way to make it work. 
+If you have any ideas or are curious as to why it doesn't work, 
+please join the discussion on [the issue tracker](https://github.com/madskristensen/ExtensionUpdater/issues/1)
