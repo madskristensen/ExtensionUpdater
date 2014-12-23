@@ -22,13 +22,17 @@ namespace MadsKristensen.ExtensionUpdater
             base.Initialize();
             Settings.Initialize(this);
 
-            var repo = GetService(typeof(SVsExtensionRepository)) as IVsExtensionRepository;
+            var repository = GetService(typeof(SVsExtensionRepository)) as IVsExtensionRepository;
             var manager = GetService(typeof(SVsExtensionManager)) as IVsExtensionManager;
 
+            // Setup the menu buttons
             OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-
-            Commands commands = new Commands(repo, manager, mcs);
+            Commands commands = new Commands(repository, manager, mcs);
             commands.Initialize();
+
+            // Check for extension updates
+            Updater updater = new Updater(repository, manager);
+            updater.CheckForUpdates();
         }
     }
 }

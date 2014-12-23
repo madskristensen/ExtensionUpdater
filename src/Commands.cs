@@ -1,23 +1,20 @@
 ﻿using Microsoft.VisualStudio.ExtensionManager;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
 using System;
 using System.ComponentModel.Design;
-using System.Runtime.InteropServices;
-using System.Windows.Threading;
 
 namespace MadsKristensen.ExtensionUpdater
 {
     class Commands
     {
         private static bool _hasLoaded = false;
-        private IVsExtensionRepository _repo;
+        private IVsExtensionRepository _repository;
         private IVsExtensionManager _manager;
         private OleMenuCommandService _mcs;
 
         public Commands(IVsExtensionRepository repo, IVsExtensionManager manager, OleMenuCommandService mcs)
         {
-            _repo = repo;
+            _repository = repo;
             _manager = manager;
             _mcs = mcs;
         }
@@ -28,21 +25,6 @@ namespace MadsKristensen.ExtensionUpdater
             OleMenuCommand command = new OleMenuCommand(MasterSwitch, menuCommandID);
             command.BeforeQueryStatus += (s, e) => { SetVisibility(command, _mcs); };
             _mcs.AddCommand(command);
-
-            CheckForUpdates();
-        }
-
-        private void CheckForUpdates()
-        {
-            Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
-            {
-                System.Threading.Tasks.Task.Run(() =>
-                {
-                    Updater updater = new Updater(_repo, _manager);
-                    updater.Update();
-                });
-
-            }), DispatcherPriority.ApplicationIdle, null);
         }
 
         private void MasterSwitch(object sender, EventArgs e)
@@ -51,7 +33,10 @@ namespace MadsKristensen.ExtensionUpdater
             Settings.Enabled = !command.Checked;
 
             if (!command.Checked) // Not checked means that it is checked.
-                CheckForUpdates();
+            {
+                Updater updater = new Updater(_repository, _manager);
+                updater.CheckForUpdates();
+            }
         }
 
         private void SetVisibility(OleMenuCommand master, OleMenuCommandService mcs)

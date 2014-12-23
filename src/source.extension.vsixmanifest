@@ -5,6 +5,9 @@
         <DisplayName>Extension Auto Updater</DisplayName>
         <Description xml:space="preserve">Configure Visual Studio to automatically install updates to the extensions you are using</Description>
         <License>Resources\License.txt</License>
+        <Icon>Resources\logo.png</Icon>
+        <PreviewImage>Resources\preview.png</PreviewImage>
+        <Tags>extensions, </Tags>
     </Metadata>
     <Installation InstalledByMsi="false">
         <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[14.0]" />

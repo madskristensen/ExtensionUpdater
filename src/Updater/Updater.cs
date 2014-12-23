@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.ExtensionManager;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace MadsKristensen.ExtensionUpdater
 {
@@ -17,7 +19,16 @@ namespace MadsKristensen.ExtensionUpdater
             _checker = new UpdateChecker(extensionRepository, extensionManager);
         }
 
-        public void Update()
+        public void CheckForUpdates()
+        {
+            Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
+            {
+                Task.Run(() => { Update(); });
+
+            }), DispatcherPriority.ApplicationIdle, null);
+        }
+
+        private void Update()
         {
             try
             {

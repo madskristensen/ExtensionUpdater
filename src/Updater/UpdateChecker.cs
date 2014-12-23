@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.ExtensionManager;
 using System.Linq;
-using Microsoft.VisualStudio.ExtensionManager;
 
 namespace MadsKristensen.ExtensionUpdater
 {
@@ -36,6 +35,5 @@ namespace MadsKristensen.ExtensionUpdater
                 return false;
             }
         }
-
     }
 }
