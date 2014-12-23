@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.ExtensionManager;
-using System.Linq;
-using Microsoft.VisualStudio.Shell;
-using System;
+﻿using System;
 using System.ComponentModel.Design;
+using System.Linq;
+using Microsoft.VisualStudio.ExtensionManager;
+using Microsoft.VisualStudio.Shell;
 
 namespace MadsKristensen.ExtensionUpdater
 {
@@ -24,7 +24,7 @@ namespace MadsKristensen.ExtensionUpdater
         {
             CommandID menuCommandID = new CommandID(GuidList.guidExtensionUpdaterCmdSet, (int)PkgCmdIDList.cmdEnableAutoUpdate);
             OleMenuCommand command = new OleMenuCommand(MasterSwitch, menuCommandID);
-            command.BeforeQueryStatus += (s, e) => { SetVisibility(command, _mcs); };
+            command.BeforeQueryStatus += (s, e) => { SetVisibility(command); };
             _mcs.AddCommand(command);
         }
 
@@ -40,7 +40,7 @@ namespace MadsKristensen.ExtensionUpdater
             }
         }
 
-        private void SetVisibility(OleMenuCommand master, OleMenuCommandService mcs)
+        private void SetVisibility(OleMenuCommand master)
         {
             master.Checked = Settings.Enabled;
 
@@ -58,7 +58,7 @@ namespace MadsKristensen.ExtensionUpdater
                 CommandID commandId = new CommandID(GuidList.guidExtensionUpdaterCmdSet, (int)PkgCmdIDList.cmdEnableAutoUpdate + num);
                 OleMenuCommand command = PrepareMenuItem(extension, commandId);
 
-                mcs.AddCommand(command);
+                _mcs.AddCommand(command);
             }
 
             _hasLoaded = true;
