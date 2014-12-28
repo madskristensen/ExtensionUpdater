@@ -1,6 +1,6 @@
 version: 1.0.{build}
 configuration: CI
-platform: x86
+platform: Any CPU
 build:
   verbosity: minimal
 artifacts:
