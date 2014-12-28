@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.Settings;
-using Microsoft.VisualStudio.Shell.Settings;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.Settings;
+using Microsoft.VisualStudio.Shell.Settings;
 
 namespace MadsKristensen.ExtensionUpdater
 {

@@ -1,10 +1,9 @@
-﻿using Microsoft.VisualStudio.ExtensionManager;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
-using System;
+﻿using System;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
-using System.Windows.Threading;
+using Microsoft.VisualStudio.ExtensionManager;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 
 namespace MadsKristensen.ExtensionUpdater
 {

@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.ExtensionManager;
-using System;
+﻿using System;
+using Microsoft.VisualStudio.ExtensionManager;
 
 namespace MadsKristensen.ExtensionUpdater
 {

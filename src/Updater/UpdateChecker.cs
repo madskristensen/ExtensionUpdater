@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.ExtensionManager;
-using System.Linq;
+﻿using System.Linq;
+using Microsoft.VisualStudio.ExtensionManager;
 
 namespace MadsKristensen.ExtensionUpdater
 {
