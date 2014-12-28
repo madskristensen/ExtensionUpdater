@@ -1,0 +1,9 @@
+version: 1.0.{build}
+configuration: CI
+platform: x86
+build:
+  verbosity: minimal
+artifacts:
+- path: bin\CI\ExtensionUpdater.vsix
+  name: ExtensionUpdater.vsix
+
