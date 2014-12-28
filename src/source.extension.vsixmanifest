@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="cb8900a0-79fb-4c76-a6d6-f4e88d3384d2" Version="1.0.15" Language="en-US" Publisher="Mads Kristensen" />
+        <Identity Id="cb8900a0-79fb-4c76-a6d6-f4e88d3384d2" Version="1.0.16" Language="en-US" Publisher="Mads Kristensen" />
         <DisplayName>Visual Studio Auto Updater</DisplayName>
         <Description xml:space="preserve">Configure Visual Studio to automatically install updates to the extensions you are using</Description>
         <License>Resources\License.txt</License>
