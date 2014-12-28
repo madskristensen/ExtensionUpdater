@@ -4,6 +4,5 @@ platform: Any CPU
 build:
   verbosity: minimal
 artifacts:
-- path: bin\CI\ExtensionUpdater.vsix
-  name: ExtensionUpdater.vsix
-
+- path: src/bin/CI/extensionupdater.vsix
+  name: extensionupdater.vsix
