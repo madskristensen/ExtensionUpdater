@@ -22,23 +22,22 @@ namespace MadsKristensen.ExtensionUpdater
         {
             base.Initialize();
 
-            Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
-            {
-                Settings.Initialize(this);
+            var repository = (IVsExtensionRepository)GetService(typeof(SVsExtensionRepository));
+            var manager = (IVsExtensionManager)GetService(typeof(SVsExtensionManager));
+            var mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
 
-                var repository = (IVsExtensionRepository)GetService(typeof(SVsExtensionRepository));
-                var manager = (IVsExtensionManager)GetService(typeof(SVsExtensionManager));
+            if (repository == null || manager == null || mcs == null)
+                return;
 
-                // Setup the menu buttons
-                OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-                Commands commands = new Commands(repository, manager, mcs);
-                commands.Initialize();
+            Settings.Initialize(this);
 
-                // Check for extension updates
-                Updater updater = new Updater(repository, manager);
-                updater.CheckForUpdates();
+            // Setup the menu buttons
+            Commands commands = new Commands(repository, manager, mcs);
+            commands.Initialize();
 
-            }), DispatcherPriority.ApplicationIdle, null);
+            // Check for extension updates
+            Updater updater = new Updater(repository, manager);
+            updater.CheckForUpdates();
         }
     }
 }
