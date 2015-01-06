@@ -15,5 +15,6 @@ namespace MadsKristensen.ExtensionUpdater
     static class PkgCmdIDList
     {
         public const uint cmdEnableAutoUpdate = 0x100;
+        public const uint cmdCheckAll = 0x200;
     }
 }

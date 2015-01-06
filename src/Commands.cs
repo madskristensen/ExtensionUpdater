@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 using Microsoft.VisualStudio.ExtensionManager;
@@ -26,6 +27,18 @@ namespace MadsKristensen.ExtensionUpdater
             OleMenuCommand command = new OleMenuCommand(MasterSwitch, menuCommandID);
             command.BeforeQueryStatus += (s, e) => { SetVisibility(command); };
             _mcs.AddCommand(command);
+
+            CommandID checkAllCommandID = new CommandID(GuidList.guidExtensionUpdaterCmdSet, (int)PkgCmdIDList.cmdCheckAll);
+            OleMenuCommand checkAll = new OleMenuCommand(CheckAll, checkAllCommandID);
+            _mcs.AddCommand(checkAll);
+        }
+
+        private void CheckAll(object sender, EventArgs e)
+        {
+            foreach (var extension in GetExtensions())
+            {
+                Settings.ToggleEnabled(extension.Header.Identifier, true);
+            }
         }
 
         private void MasterSwitch(object sender, EventArgs e)
@@ -49,11 +62,8 @@ namespace MadsKristensen.ExtensionUpdater
 
             int num = 0;
 
-            foreach (var extension in _manager.GetInstalledExtensions().OrderBy(e => e.Header.Name))
+            foreach (var extension in GetExtensions().OrderBy(e => e.Header.Name))
             {
-                if (extension.Header.SystemComponent || extension.Header.AllUsers || extension.Header.InstalledByMsi)
-                    continue;
-
                 num++;
                 CommandID commandId = new CommandID(GuidList.guidExtensionUpdaterCmdSet, (int)PkgCmdIDList.cmdEnableAutoUpdate + num);
                 OleMenuCommand command = PrepareMenuItem(extension, commandId);
@@ -84,6 +94,13 @@ namespace MadsKristensen.ExtensionUpdater
         {
             OleMenuCommand command = (OleMenuCommand)sender;
             Settings.ToggleEnabled(command.ParametersDescription, !command.Checked);
+        }
+
+        private IEnumerable<IInstalledExtension> GetExtensions()
+        {
+            return from e in _manager.GetInstalledExtensions()
+                   where !e.Header.SystemComponent && !e.Header.AllUsers && !e.Header.InstalledByMsi && e.State == EnabledState.Enabled
+                   select e;
         }
     }
 }

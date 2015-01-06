@@ -16,17 +16,27 @@
         </Menus>
 
         <Groups>
-            <Group guid="guidFlyoutMenu" id="FlyoutMenuStaticGroup" priority="0x0600">
+            <Group guid="guidFlyoutMenu" id="FlyoutMenuDynamicGroup" priority="0x0600">
+                <Parent guid="guidFlyoutMenu" id="FlyoutMenu"/>
+            </Group>
+            <Group guid="guidFlyoutMenu" id="FlyoutMenuStaticGroup" priority="0x0800">
                 <Parent guid="guidFlyoutMenu" id="FlyoutMenu"/>
             </Group>
         </Groups>
 
         <Buttons>
             <Button guid="guidExtensionUpdaterCmdSet" id="cmdEnableAutoUpdate" priority="0x0100" type="Button">
-                <Parent guid="guidFlyoutMenu" id="FlyoutMenuStaticGroup" />
+                <Parent guid="guidFlyoutMenu" id="FlyoutMenuDynamicGroup" />
                 <CommandFlag>DynamicItemStart</CommandFlag>
                 <Strings>
                     <ButtonText>Enable Automatic Updates</ButtonText>
+                </Strings>
+            </Button>
+
+            <Button guid="guidExtensionUpdaterCmdSet" id="cmdCheckAll" priority="0x0100" type="Button">
+                <Parent guid="guidFlyoutMenu" id="FlyoutMenuStaticGroup" />
+                <Strings>
+                    <ButtonText>Check All</ButtonText>
                 </Strings>
             </Button>
         </Buttons>
@@ -40,11 +50,13 @@
         <!-- This is the guid used to group the menu commands together -->
         <GuidSymbol name="guidExtensionUpdaterCmdSet" value="{c1703d5f-c150-4977-a4a7-d4a6094412bf}">
             <IDSymbol name="cmdEnableAutoUpdate" value="0x0100" />
+            <IDSymbol name="cmdCheckAll" value="0x0200" />
         </GuidSymbol>
 
         <GuidSymbol name="guidFlyoutMenu" value="{c1703d5f-c150-4977-a4a2-d4a6094412ba}">
             <IDSymbol name="FlyoutMenu" value="0x1020" />
-            <IDSymbol name="FlyoutMenuStaticGroup" value="0x1030" />
+            <IDSymbol name="FlyoutMenuDynamicGroup" value="0x1030" />
+            <IDSymbol name="FlyoutMenuStaticGroup" value="0x1040" />
         </GuidSymbol>
     </Symbols>
 
