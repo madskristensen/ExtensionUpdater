@@ -35,7 +35,7 @@ namespace MadsKristensen.ExtensionUpdater
 
         private void CheckAll(object sender, EventArgs e)
         {
-            foreach (var extension in GetExtensions())
+            foreach (var extension in GetExtensions(_manager))
             {
                 Settings.ToggleEnabled(extension.Header.Identifier, true);
             }
@@ -62,7 +62,7 @@ namespace MadsKristensen.ExtensionUpdater
 
             int num = 0;
 
-            foreach (var extension in GetExtensions().OrderBy(e => e.Header.Name))
+            foreach (var extension in GetExtensions(_manager).OrderBy(e => e.Header.Name))
             {
                 num++;
                 CommandID commandId = new CommandID(GuidList.guidExtensionUpdaterCmdSet, (int)PkgCmdIDList.cmdEnableAutoUpdate + num);
@@ -96,9 +96,9 @@ namespace MadsKristensen.ExtensionUpdater
             Settings.ToggleEnabled(command.ParametersDescription, !command.Checked);
         }
 
-        private IEnumerable<IInstalledExtension> GetExtensions()
+        public static IEnumerable<IInstalledExtension> GetExtensions(IVsExtensionManager manager)
         {
-            return from e in _manager.GetInstalledExtensions()
+            return from e in manager.GetInstalledExtensions()
                    where !e.Header.SystemComponent && !e.Header.AllUsers && !e.Header.InstalledByMsi && e.State == EnabledState.Enabled
                    select e;
         }

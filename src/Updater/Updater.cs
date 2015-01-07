@@ -37,7 +37,7 @@ namespace MadsKristensen.ExtensionUpdater
 
         private void DownloadAndInstall()
         {
-            IEnumerable<IInstalledExtension> extensions = _manager.GetEnabledExtensions();
+            IEnumerable<IInstalledExtension> extensions = Commands.GetExtensions(_manager);
 
             foreach (IInstalledExtension extension in extensions)
             {
