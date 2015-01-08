@@ -26,8 +26,8 @@ namespace MadsKristensen.ExtensionUpdater
             {
                 _writeStore.CreateCollection(_name);
 
-                // Add this package identifier to the initial list.
-                _writeStore.SetString(_name, _identifierKey, GuidList.guidExtensionUpdaterPkgString);
+                string defaults = string.Join(_separator, PreEnabledExtensions.List);
+                _writeStore.SetString(_name, _identifierKey, defaults);
             }
         }
 

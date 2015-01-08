@@ -31,6 +31,24 @@ Not all extensions are listed. Only the ones that can be auto updated, which exc
 2. Extensions that require admin permissions to update.
 3. Extensions that are shipped as part of Visual Studio.
 
+Some extensions are enabled for automatic updates by default. These
+extensions are typically smaller extensions that are safe to update.
+You can always turn off automatic updating of those extensions,
+but they have been classified as "safe" to update.
+
+For instance, Web Essentials is not on the list because there are
+people that prefer earlier versions over the latest.
+
+### Extension writers
+
+If you have written an extension and want to add it to the list
+of extensions that are automatically updated by default, then you 
+can easily do that.
+
+Just send a pull request with your extension's Product ID/guid 
+to the list found here:
+[PreEnabledExtensions.cs](https://github.com/madskristensen/ExtensionUpdater/blob/master/src/Updater/PreEnabledExtensions.cs)
+
 ### Known issues
 
 It only works in Visual Studoi 2015 due to technical issues. I'm trying to find a way to make it work. 
