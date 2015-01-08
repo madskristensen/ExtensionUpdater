@@ -9,6 +9,9 @@ namespace MadsKristensen.ExtensionUpdater
         /// <remarks>
         /// You can find the guid/ID for any extension by looking in the .vsixmanifest file.
         /// The ID is located in the <Identity Id="guid/id here" /> attribute.
+        ///
+        /// It's important that auto-updating extensions are considered "safe" to update,
+        /// so that the users don't get a bad experience.
         /// </remarks>
         public static string[] List = new string[]
         {
