@@ -22,6 +22,7 @@ namespace MadsKristensen.ExtensionUpdater
             "aaa8d5c5-24d8-4c45-9620-9f77b2aa6363", // Package Intellisense
             "0798393f-f7b0-4283-a36e-c57a73f031c4", // Error Watcher
             "cced4e72-2f8c-4458-b8df-4934677e4bf3", // GruntLauncher
+            "4156516b-f6e6-40f2-aecb-ff99cded5f8a", // Open from Azure Websites
         };
     }
 }
