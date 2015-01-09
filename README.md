@@ -48,9 +48,3 @@ can easily do that.
 Just send a pull request with your extension's Product ID/guid 
 to the list found here:
 [PreEnabledExtensions.cs](https://github.com/madskristensen/ExtensionUpdater/blob/master/src/Updater/PreEnabledExtensions.cs)
-
-### Known issues
-
-It only works in Visual Studoi 2015 due to technical issues. I'm trying to find a way to make it work. 
-If you have any ideas or are curious as to why it doesn't work, 
-please join the discussion on [the issue tracker](https://github.com/madskristensen/ExtensionUpdater/issues/1)
