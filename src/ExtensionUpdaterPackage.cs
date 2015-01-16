@@ -15,7 +15,7 @@ namespace MadsKristensen.ExtensionUpdater
     [Guid(GuidList.guidExtensionUpdaterPkgString)]
     public sealed class ExtensionUpdaterPackage : ExtensionPointPackage
     {
-        public const string Version = "1.3";
+        public const string Version = "1.5";
 
         protected override void Initialize()
         {
