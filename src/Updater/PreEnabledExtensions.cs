@@ -24,6 +24,7 @@ namespace MadsKristensen.ExtensionUpdater
             "cced4e72-2f8c-4458-b8df-4934677e4bf3", // GruntLauncher
             "4156516b-f6e6-40f2-aecb-ff99cded5f8a", // Open from Azure Websites
             "0e313dfd-be80-4afb-b5e9-6e74d369f7a1", // SQL Server Compact / SQLite Toolbox
+            "f4ab1e64-5d35-4f06-bad9-bf414f4b3bbb", // Open Command Line
         };
     }
 }
