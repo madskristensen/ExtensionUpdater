@@ -31,9 +31,22 @@ namespace MadsKristensen.ExtensionUpdater
             CommandID checkAllCommandID = new CommandID(GuidList.guidExtensionUpdaterCmdSet, (int)PkgCmdIDList.cmdCheckAll);
             OleMenuCommand checkAll = new OleMenuCommand(CheckAll, checkAllCommandID);
             _mcs.AddCommand(checkAll);
-        }
 
-        private void CheckAll(object sender, EventArgs e)
+			CommandID searchCommandID = new CommandID(GuidList.guidExtensionUpdaterCmdSet, (int)PkgCmdIDList.cmdSearch);
+			OleMenuCommand search = new OleMenuCommand(Search, searchCommandID);
+			_mcs.AddCommand(search);
+		}
+
+		private void Search(object sender, EventArgs e)
+		{
+			Dialog.SearchDialog searchbox = new Dialog.SearchDialog();
+			searchbox._manager = _manager;
+			searchbox._repository = _repository;
+			searchbox.ShowActivated = true;
+			searchbox.ShowDialog();
+		}
+
+		private void CheckAll(object sender, EventArgs e)
         {
             foreach (var extension in GetExtensions(_manager))
             {

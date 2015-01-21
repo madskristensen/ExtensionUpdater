@@ -16,8 +16,10 @@ namespace MadsKristensen.ExtensionUpdater
         public string DownloadUpdateUrl { get; set; }
         public string VsixReferences { get; set; }
         public string VsixVersion { get; set; }
+		public string Name { get; set; }
+		public int Ranking { get; set; }
 
-        public Version NonNullVsixVersion
+		public Version NonNullVsixVersion
         {
             get
             {
@@ -33,5 +35,10 @@ namespace MadsKristensen.ExtensionUpdater
                 return _nonNullVsixVersion;
             }
         }
-    }
+
+		public override string ToString()
+		{
+			return Name;
+		}
+	}
 }

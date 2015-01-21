@@ -1,6 +1,9 @@
 version: 1.0.{build}
+os: Visual Studio 2015 CTP
+
 configuration: CI
 platform: Any CPU
+
 build:
   verbosity: minimal
 artifacts:

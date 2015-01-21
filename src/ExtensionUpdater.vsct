@@ -39,9 +39,19 @@
                     <ButtonText>Check All</ButtonText>
                 </Strings>
             </Button>
-        </Buttons>
 
+            <Button guid="guidExtensionUpdaterCmdSet" id="cmdSearch" priority="0x9010" type="Button">
+                <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_OTHER2" />
+                <Strings>
+                    <ButtonText>Search for Extensions...</ButtonText>
+                </Strings>
+            </Button>
+        </Buttons>
     </Commands>
+
+    <KeyBindings>
+        <KeyBinding guid="guidExtensionUpdaterCmdSet" id="cmdSearch" mod1="Control Shift" key1="9" editor="guidVSStd97"/>
+    </KeyBindings>
 
     <Symbols>
         <!-- This is the package guid. -->
@@ -51,6 +61,7 @@
         <GuidSymbol name="guidExtensionUpdaterCmdSet" value="{c1703d5f-c150-4977-a4a7-d4a6094412bf}">
             <IDSymbol name="cmdEnableAutoUpdate" value="0x0100" />
             <IDSymbol name="cmdCheckAll" value="0x0200" />
+            <IDSymbol name="cmdSearch" value="0x0300" />
         </GuidSymbol>
 
         <GuidSymbol name="guidFlyoutMenu" value="{c1703d5f-c150-4977-a4a2-d4a6094412ba}">
