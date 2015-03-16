@@ -35,7 +35,20 @@ namespace MadsKristensen.ExtensionUpdater
 			CommandID searchCommandID = new CommandID(GuidList.guidExtensionUpdaterCmdSet, (int)PkgCmdIDList.cmdSearch);
 			OleMenuCommand search = new OleMenuCommand(Search, searchCommandID);
 			_mcs.AddCommand(search);
+
+            CommandID exportImportCommandID = new CommandID(GuidList.guidExtensionUpdaterCmdSet, (int)PkgCmdIDList.cmdExportImport);
+            OleMenuCommand exportImport = new OleMenuCommand(ExportImport, exportImportCommandID);
+            _mcs.AddCommand(exportImport);
 		}
+
+        private void ExportImport(object sender, EventArgs e)
+        {
+            Dialog.ExportImportDialog exportImportBox = new Dialog.ExportImportDialog();
+            exportImportBox._manager = _manager;
+            exportImportBox._repository = _repository;
+            exportImportBox.ShowActivated = true;
+            exportImportBox.ShowDialog();
+        }
 
 		private void Search(object sender, EventArgs e)
 		{

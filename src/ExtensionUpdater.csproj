@@ -89,6 +89,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands.cs" />
+    <Compile Include="Dialog\ExportImportDialog.xaml.cs">
+      <DependentUpon>ExportImportDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\SearchDialog.xaml.cs">
       <DependentUpon>SearchDialog.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Dialog\ExportImportDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialog\SearchDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
