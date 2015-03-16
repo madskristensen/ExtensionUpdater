@@ -16,7 +16,7 @@ namespace MadsKristensen.ExtensionUpdater
     {
         public const uint cmdEnableAutoUpdate = 0x100;
         public const uint cmdCheckAll = 0x200;
-		public const uint cmdSearch = 0x300;
+        public const uint cmdSearch = 0x300;
         public const uint cmdExportImport = 0x400;
-	}
+    }
 }

@@ -128,7 +128,7 @@ namespace MadsKristensen.ExtensionUpdater.Dialog
                 importTextBlock.Text = "Extensions were found, but you've already got them all.";
                 _isImportProcessing = false;
                 return;
-            }           
+            }
 
             // Query for the complete new extension objects
             var query = _repository.CreateQuery<GalleryEntry>(false, true, "ExtensionManagerQuery")
@@ -159,8 +159,8 @@ namespace MadsKristensen.ExtensionUpdater.Dialog
             if (!entries.Any())
             {
                 importTextBlock.Text = "Couldn't find any of the new extensions in the gallery.";
-                    // TODO: Persist _newExtensionsCache so available on callback
-                    //+ "Specifically:\r\n" + String.Join("\r\n", _newExtensionsCache.Select(id => " - " + id));
+                // TODO: Persist _newExtensionsCache so available on callback
+                //+ "Specifically:\r\n" + String.Join("\r\n", _newExtensionsCache.Select(id => " - " + id));
                 _isImportProcessing = false;
                 return;
             }
@@ -185,7 +185,7 @@ namespace MadsKristensen.ExtensionUpdater.Dialog
                     catch (Exception ex)
                     {
                         sbInstallReport.AppendLine("install failed. " + ex.Message);
-                    }                    
+                    }
                 }
 
                 if (wasAnInstallSuccessful)
