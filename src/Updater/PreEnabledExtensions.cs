@@ -28,6 +28,7 @@ namespace MadsKristensen.ExtensionUpdater
             "e6e2a48e-387d-4af2-9072-86a5276da6d4", // SideWaffle
             "bf95754f-93d3-42ff-bfe3-e05d23188b08", // Image Optimizer
             "96559c66-f326-40e2-95c1-449a80387524", // Flatten Packages
+            "T4Toolbox.12",                         // T4 Toolbox for Visual Studio 2013
         };
     }
 }
