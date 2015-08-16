@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Microsoft.VisualStudio.ExtensionManager;
 using System.IO;
 using System.Text;
+using Microsoft.Win32;
 
 namespace MadsKristensen.ExtensionUpdater.Dialog
 {
@@ -25,8 +26,7 @@ namespace MadsKristensen.ExtensionUpdater.Dialog
         {
             InitializeComponent();
             PreviewKeyDown += new KeyEventHandler(HandleEsc);
-            exportLabel.Content = string.Empty;
-            importTextBlock.Text = string.Empty;
+            textBlock.Text = string.Empty;
 
             Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -34,28 +34,31 @@ namespace MadsKristensen.ExtensionUpdater.Dialog
 
             }), System.Windows.Threading.DispatcherPriority.ApplicationIdle, null);
         }
-
-        private void exportTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        
+        private void exportButton_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(exportTextBox.Text) || _isExportTextBoxProcessing)
+            var saveFileDialog = new SaveFileDialog()
             {
-                exportTextBox.IsEnabled = false;
+                AddExtension = true,
+                DefaultExt = ".vsextensionslist",
+                CheckPathExists = true,
+                Filter = "Extensions List (.vsextensionslist)|*.vsextensionslist",
+                FilterIndex = 1,
+                //InitialDirectory = "%userprofile%",
+            };
+            
+            var userClickedOK = saveFileDialog.ShowDialog() ?? false;
+            if (!userClickedOK)
+            {
                 return;
             }
 
-            _isExportTextBoxProcessing = true;
+            if (string.IsNullOrWhiteSpace(saveFileDialog.FileName))
+            {
+                textBlock.Text = "Extensions not exported - please choose a filename.";
+            }
 
-            // TODO: Check it's a valid path/filename or something
-            var isValid = true;
-
-            exportButton.IsEnabled = isValid;
-
-            _isExportTextBoxProcessing = false;
-        }
-
-        private void exportButton_Click(object sender, RoutedEventArgs e)
-        {
-            exportLabel.Content = "Exporting your extensions...";
+            textBlock.Text = "Exporting your extensions...";
 
             var installedExtensions = Commands.GetExtensions(_manager);
             var sbInstalledExtensions = new StringBuilder(installedExtensions.Count() * 50);
@@ -66,46 +69,50 @@ namespace MadsKristensen.ExtensionUpdater.Dialog
 
             try
             {
-                File.WriteAllText(exportTextBox.Text, sbInstalledExtensions.ToString());
-                exportLabel.Content = "Extensions exported.";
-                exportTextBox.Clear();
+                File.WriteAllText(saveFileDialog.FileName, sbInstalledExtensions.ToString());
+                textBlock.Text = "Extensions exported.";
             }
             catch
             {
-                exportLabel.Content = "Problem exporting extensions.";
+                textBlock.Text = "Problem exporting extensions.";
             }
         }
-
-        private void importTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        
+        private void importButton_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(importTextBox.Text) || _isImportTextBoxProcessing)
+            var openFileDialog = new OpenFileDialog()
             {
-                exportTextBox.IsEnabled = false;
+                AddExtension = true,
+                DefaultExt = ".vsextensionslist",
+                CheckPathExists = true,
+                Filter = "Extensions List (.vsextensionslist)|*.vsextensionslist",
+                FilterIndex = 1,
+                //InitialDirectory = "%userprofile%",
+            };
+
+            var userClickedOK = openFileDialog.ShowDialog() ?? false;
+            if (!userClickedOK)
+            {
                 return;
             }
 
-            _isImportTextBoxProcessing = true;
+            if (string.IsNullOrWhiteSpace(openFileDialog.FileName))
+            {
+                textBlock.Text = "Extensions not imported - please select a file.";
+            }
 
-            // TODO: Can this be done async or is that unnecessary?
-            importButton.IsEnabled = File.Exists(importTextBox.Text);
-
-            _isImportTextBoxProcessing = false;
-        }
-
-        private void importButton_Click(object sender, RoutedEventArgs e)
-        {
             _isImportProcessing = true;
-            importTextBlock.Text = "Importing your extensions...";
+            textBlock.Text = "Importing your extensions...";
 
             // Get lines from file
             string[] importFileLines = null;
             try
             {
-                importFileLines = File.ReadAllLines(importTextBox.Text).Where(l => !String.IsNullOrWhiteSpace(l)).Select(l => l.Trim()).ToArray();
+                importFileLines = File.ReadAllLines(openFileDialog.FileName).Where(l => !String.IsNullOrWhiteSpace(l)).Select(l => l.Trim()).ToArray();
             }
             catch
             {
-                importTextBlock.Text = "Error accessing/reading import file.";
+                textBlock.Text = "Error accessing/reading import file.";
                 _isImportProcessing = false;
                 return;
             }
@@ -113,7 +120,7 @@ namespace MadsKristensen.ExtensionUpdater.Dialog
             // Validate 
             if (!importFileLines.Any())
             {
-                importTextBlock.Text = "No extensions were found in the import file.";
+                textBlock.Text = "No extensions were found in the import file.";
                 _isImportProcessing = false;
                 return;
             }
@@ -125,7 +132,7 @@ namespace MadsKristensen.ExtensionUpdater.Dialog
 
             if (!_newExtensionsCache.Any())
             {
-                importTextBlock.Text = "Extensions were found, but you've already got them all.";
+                textBlock.Text = "Extensions were found, but you've already got them all.";
                 _isImportProcessing = false;
                 return;
             }
@@ -138,7 +145,7 @@ namespace MadsKristensen.ExtensionUpdater.Dialog
                 .Take(500)
                  as IVsExtensionRepositoryQuery<GalleryEntry>;
 
-            importTextBlock.Text = "Looking up new extensions in the gallery...";
+            textBlock.Text = "Looking up new extensions in the gallery...";
 
             query.ExecuteCompleted += Query_ExecuteCompleted;
             query.ExecuteAsync();
@@ -148,7 +155,7 @@ namespace MadsKristensen.ExtensionUpdater.Dialog
         {
             if (e.Error != null)
             {
-                importTextBlock.Text = "Error looking up new extensions in the gallery...";
+                textBlock.Text = "Error looking up new extensions in the gallery...";
                 _isImportProcessing = false;
                 return;
             }
@@ -158,7 +165,7 @@ namespace MadsKristensen.ExtensionUpdater.Dialog
 
             if (!entries.Any())
             {
-                importTextBlock.Text = "Couldn't find any of the new extensions in the gallery.";
+                textBlock.Text = "Couldn't find any of the new extensions in the gallery.";
                 // TODO: Persist _newExtensionsCache so available on callback
                 //+ "Specifically:\r\n" + String.Join("\r\n", _newExtensionsCache.Select(id => " - " + id));
                 _isImportProcessing = false;
@@ -193,12 +200,11 @@ namespace MadsKristensen.ExtensionUpdater.Dialog
                     sbInstallReport.AppendLine().AppendLine("Please restart for changes to take affect.");
                 }
 
-                importTextBlock.Text = sbInstallReport.ToString();
-                importTextBox.Clear();
+                textBlock.Text = sbInstallReport.ToString();
             }
             catch (Exception ex)
             {
-                importTextBlock.Text = "Problem dowloading/installing extension/s.\r\nException message: " + ex.Message;
+                textBlock.Text = "Problem dowloading/installing extension/s.\r\nException message: " + ex.Message;
             }
             finally
             {

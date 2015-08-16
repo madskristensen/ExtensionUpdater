@@ -92,9 +92,9 @@
     <Compile Include="Dialog\ExportImportDialog.xaml.cs">
       <DependentUpon>ExportImportDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\SearchDialog.xaml.cs">
+    <!--<Compile Include="Dialog\SearchDialog.xaml.cs">
       <DependentUpon>SearchDialog.xaml</DependentUpon>
-    </Compile>
+    </Compile>-->
     <Compile Include="Guids.cs" />
     <Compile Include="ExtensionUpdaterPackage.cs" />
     <Compile Include="Settings.cs" />
@@ -119,6 +119,7 @@
   <ItemGroup>
     <VSCTCompile Include="ExtensionUpdater.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +139,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dialog\SearchDialog.xaml">
+    <!--<Page Include="Dialog\SearchDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </Page>-->
   </ItemGroup>
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>

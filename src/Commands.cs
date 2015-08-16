@@ -32,9 +32,9 @@ namespace MadsKristensen.ExtensionUpdater
             OleMenuCommand checkAll = new OleMenuCommand(CheckAll, checkAllCommandID);
             _mcs.AddCommand(checkAll);
 
-            CommandID searchCommandID = new CommandID(GuidList.guidExtensionUpdaterCmdSet, (int)PkgCmdIDList.cmdSearch);
-            OleMenuCommand search = new OleMenuCommand(Search, searchCommandID);
-            _mcs.AddCommand(search);
+            //CommandID searchCommandID = new CommandID(GuidList.guidExtensionUpdaterCmdSet, (int)PkgCmdIDList.cmdSearch);
+            //OleMenuCommand search = new OleMenuCommand(Search, searchCommandID);
+            //_mcs.AddCommand(search);
 
             CommandID exportImportCommandID = new CommandID(GuidList.guidExtensionUpdaterCmdSet, (int)PkgCmdIDList.cmdExportImport);
             OleMenuCommand exportImport = new OleMenuCommand(ExportImport, exportImportCommandID);
@@ -48,18 +48,18 @@ namespace MadsKristensen.ExtensionUpdater
             exportImportBox._repository = _repository;
             exportImportBox.ShowActivated = true;
             exportImportBox.ShowDialog();
-        }
+		}
 
-        private void Search(object sender, EventArgs e)
-        {
-            Dialog.SearchDialog searchbox = new Dialog.SearchDialog();
-            searchbox._manager = _manager;
-            searchbox._repository = _repository;
-            searchbox.ShowActivated = true;
-            searchbox.ShowDialog();
-        }
+        //private void Search(object sender, EventArgs e)
+        //{
+        //    Dialog.SearchDialog searchbox = new Dialog.SearchDialog();
+        //    searchbox._manager = _manager;
+        //    searchbox._repository = _repository;
+        //    searchbox.ShowActivated = true;
+        //    searchbox.ShowDialog();
+        //}
 
-        private void CheckAll(object sender, EventArgs e)
+		private void CheckAll(object sender, EventArgs e)
         {
             foreach (var extension in GetExtensions(_manager))
             {
