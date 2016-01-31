@@ -49,15 +49,6 @@
         </Strings>
       </Button>
 
-      <!--
-      <Button guid="guidExtensionUpdaterCmdSet" id="cmdSearch" priority="0x9010" type="Button">
-          <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_OTHER2" />
-          <Strings>
-              <ButtonText>Search for Extensions...</ButtonText>
-          </Strings>
-      </Button>
-      -->
-
       <Button guid="guidImportExportCmdSet" id="cmdImport" priority="0x0100" type="Button">
         <Parent guid="guidFlyoutMenu" id="FlyoutImportExportGroup" />
         <Strings>
@@ -74,19 +65,12 @@
     </Buttons>
   </Commands>
 
-  <!--
-  <KeyBindings>
-      <KeyBinding guid="guidExtensionUpdaterCmdSet" id="cmdSearch" mod1="Control Shift" key1="9" editor="guidVSStd97"/>
-  </KeyBindings>
-  -->
-
   <Symbols>
     <GuidSymbol name="guidExtensionUpdaterPkg" value="{cb8900a0-79fb-4c76-a6d6-f4e88d3384d2}" />
 
     <GuidSymbol name="guidExtensionUpdaterCmdSet" value="{c1703d5f-c150-4977-a4a7-d4a6094412bf}">
       <IDSymbol name="cmdEnableAutoUpdate" value="0x0100" />
       <IDSymbol name="cmdCheckAll" value="0x0200" />
-      <!--<IDSymbol name="cmdSearch" value="0x0300" />-->
     </GuidSymbol>
 
     <GuidSymbol name="guidFlyoutMenu" value="{c1703d5f-c150-4977-a4a2-d4a6094412ba}">
