@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using Microsoft.VisualStudio.ExtensionManager;
+﻿using Microsoft.VisualStudio.ExtensionManager;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio;
 using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace MadsKristensen.ExtensionUpdater
@@ -41,11 +40,7 @@ namespace MadsKristensen.ExtensionUpdater
             CommandID checkAllCommandID = new CommandID(GuidList.guidExtensionUpdaterCmdSet, (int)PkgCmdIDList.cmdCheckAll);
             OleMenuCommand checkAll = new OleMenuCommand(CheckAll, checkAllCommandID);
             _mcs.AddCommand(checkAll);
-
-            //CommandID searchCommandID = new CommandID(GuidList.guidExtensionUpdaterCmdSet, (int)PkgCmdIDList.cmdSearch);
-            //OleMenuCommand search = new OleMenuCommand(Search, searchCommandID);
-            //_mcs.AddCommand(search);
-
+            
             CommandID importCommandID = new CommandID(GuidList.guidImportExportCmdSet, (int)PkgCmdIDList.cmdImport);
             OleMenuCommand import = new OleMenuCommand(Import, importCommandID);
             _mcs.AddCommand(import);
@@ -250,16 +245,7 @@ namespace MadsKristensen.ExtensionUpdater
         }
 
         #endregion
-
-        //private void Search(object sender, EventArgs e)
-        //{
-        //    Dialog.SearchDialog searchbox = new Dialog.SearchDialog();
-        //    searchbox._manager = _manager;
-        //    searchbox._repository = _repository;
-        //    searchbox.ShowActivated = true;
-        //    searchbox.ShowDialog();
-        //}
-
+        
 		private void CheckAll(object sender, EventArgs e)
         {
             foreach (var extension in GetExtensions(_manager))
