@@ -24,14 +24,24 @@ namespace MadsKristensen.ExtensionUpdater
             var repository = (IVsExtensionRepository)GetService(typeof(SVsExtensionRepository));
             var manager = (IVsExtensionManager)GetService(typeof(SVsExtensionManager));
             var mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            var outWindow = GetService(typeof(SVsOutputWindow)) as IVsOutputWindow;
 
-            if (repository == null || manager == null || mcs == null)
+            if (repository == null || manager == null || mcs == null || outWindow == null)
+            {
                 return;
+            }
 
+            // Get a unique output window pane
+            var paneGuid = new Guid("233a6542-251a-42b1-b435-c80a3d70340e");
+            outWindow.CreatePane(ref paneGuid, "Extension Updater", 1, 1);
+            IVsOutputWindowPane customOutputPane;
+            outWindow.GetPane(ref paneGuid, out customOutputPane);
+
+            // Initialize settings
             Settings.Initialize(this);
 
             // Setup the menu buttons
-            Commands commands = new Commands(repository, manager, mcs);
+            Commands commands = new Commands(repository, manager, mcs, customOutputPane);
             commands.Initialize();
 
             // Check for extension updates

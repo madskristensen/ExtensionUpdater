@@ -89,6 +89,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands.cs" />
+    <!--<Compile Include="Dialog\SearchDialog.xaml.cs">
+      <DependentUpon>SearchDialog.xaml</DependentUpon>
+    </Compile>-->
     <Compile Include="Guids.cs" />
     <Compile Include="ExtensionUpdaterPackage.cs" />
     <Compile Include="Settings.cs" />
@@ -113,6 +116,7 @@
   <ItemGroup>
     <VSCTCompile Include="ExtensionUpdater.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +131,7 @@
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>
